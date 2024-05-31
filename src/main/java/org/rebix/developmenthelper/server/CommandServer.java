@@ -3,8 +3,8 @@ package org.rebix.developmenthelper.server;
 import java.net.ServerSocket;
 
 public class CommandServer {
-    public static ServerSocket serverSocket;
-    public static Thread thread;
+    public ServerSocket serverSocket;
+    public Thread thread;
 
     public CommandServer() {
         try {
@@ -12,10 +12,12 @@ public class CommandServer {
             thread = new Thread(() -> {
                 while (true) {
                     try {
-                        if (serverSocket.isClosed())
+                        if (serverSocket.isClosed() || thread.isInterrupted())
                             break;
                         new CommandServerThread(serverSocket.accept()).start();
                     } catch (Exception e) {
+                        if (e.getMessage().equals("Socket closed"))
+                            break;
                         //noinspection CallToPrintStackTrace
                         e.printStackTrace();
                     }
@@ -28,7 +30,7 @@ public class CommandServer {
         }
     }
 
-    public static void stop() {
+    public void stop() {
         try {
             thread.interrupt();
             serverSocket.close();

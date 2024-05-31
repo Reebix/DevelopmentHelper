@@ -13,18 +13,12 @@ public class DevelopmentHelper extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        //noinspection InstantiationOfUtilityClass
         commandServer = new CommandServer();
-
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             if (!commands.isEmpty()) {
                 String command = commands.get(0);
-                if (command.equals("reload")) {
-                    CommandServer.stop();
-                    Bukkit.reload();
-                } else
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
                 commands.remove(0);
             }
         }, 0, 10);
@@ -32,5 +26,6 @@ public class DevelopmentHelper extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        commandServer.stop();
     }
 }
