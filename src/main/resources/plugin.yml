@@ -1,0 +1,4 @@
+name: DevelopmentHelper
+version: '${project.version}'
+main: org.rebix.developmenthelper.DevelopmentHelper
+api-version: '1.20'
