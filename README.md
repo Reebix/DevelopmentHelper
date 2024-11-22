@@ -21,5 +21,5 @@ public static void main(String[] args) {
 
 can be used to send commands to the server, in this case it reloads the server
 
-**Warning: This is a development plugin if anyone knows about it being on the server they effectively have console
-permissions**
+**⚠⚠⚠Warning: This is a development plugin if anyone knows about it being on the server they effectively have console
+permissions⚠⚠⚠**
